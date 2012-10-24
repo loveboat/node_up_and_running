@@ -9,11 +9,16 @@ chatServer.on('connection', function(client) {
 	clientList.push(client)
 	
 	client.on('data', function(data) { 
-		for(var i=0;i<clientList.length;i+=1) {
-			//write this data to all clients
-			clientList[i].write(data) 
-		}
+		broadcast(data, client)
 	})
 })
+
+function broadcast(message, client) {
+	for(var i=0;i<clientList.length;i++) {
+		if(client !== clientList[i]) {
+			clientList[i].write(client.name + " says " + message) 
+		}
+	}
+};
 
 chatServer.listen(9000)
