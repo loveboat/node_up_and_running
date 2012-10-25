@@ -18,7 +18,8 @@ var req = http.request(opts, function(res) {
 	})
 	
 	res.on('end', function() {
-		assert.strictEqual(data, '{"status":"ok","message":"Tweet received"}')
+		/*assert.strictEqual(data, '{"status":"ok","message":"Tweet received"}')*/
+		assert.strictEqual(data, '{\n  "status": "ok",\n  "message": "Tweet received"\n}')
 	})
 })
 
